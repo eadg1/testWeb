@@ -13,7 +13,8 @@ pipeline {
         sh 'apt update'
         sh 'apt install -y ansible'
         sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
-        sh 'echo "[webservers] \n  web@192.168.2.21" > /etc/ansible/hosts'
+        sh 'echo "[webservers]" > /etc/ansible/hosts'
+        sh 'echo " web@192.168.2.21" >> /etc/ansible/hosts'
         sh 'ls -l'      }
     }
     stage('test') {
@@ -31,9 +32,9 @@ stage ('Deploy') {
               }
             }
 steps {
-    ansiblePlaybook(playbook:'deployment/playbook.yml', 
+    ansiblePlaybook(playbook:'deployment/playbook.yml',
         credentialsId: 'web',
-         disableHostKeyChecking: true)
+        disableHostKeyChecking: true)
         
 
 

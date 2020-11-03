@@ -4,4 +4,4 @@
   tasks:
    - name: list
      shell:
-       ls  .
+       echo "OK";
