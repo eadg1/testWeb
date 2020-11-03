@@ -33,8 +33,7 @@ stage ('Deploy') {
 steps {
     ansiblePlaybook(playbook:'deployment/playbook.yml', 
         credentialsId: 'web',
-         disableHostKeyChecking: true,
-        extras: '-e username=web')
+         disableHostKeyChecking: true)
         
 
 
