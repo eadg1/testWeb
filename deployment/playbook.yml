@@ -1,0 +1,13 @@
+---
+- hosts: all
+  become: true
+  tasks:
+   - name: copy app file
+     copy:
+        src: /var/jenkins_home/workspace/samplePY_master/app.py
+        dest: /home/web/www/app.py
+     notify: restart flask app
+
+  handlers:
+    - name: restart flask app
+      service: name=app state=restarted
