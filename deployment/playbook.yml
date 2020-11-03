@@ -4,20 +4,20 @@
   tasks:
    - name: copy ini
      copy:
-       src: /var/lib/jenkins/workspace/testJob/app.ini
+       src:  /var/lib/jenkins/workspace/TestJob/app.ini
        dest: /home/web/www/app.ini
    - name: copy service
      copy:
-       src: /var/lib/jenkins/workspace/testJob/app/app.service
+       src: /var/lib/jenkins/workspace/TestJob/app/app.service
        dest: /etc/systemd/system/app.service
    - name: copy site conf
      copy:
-        src: /var/lib/jenkins/workspace/testJob/app/app.conf
+        src: /var/lib/jenkins/workspace/TestJob/app/app.conf
         dest: /etc/nginx/sites-enabled/app.conf
      notify: restart nginx
    - name: copy app file
      copy:
-        src: /var/lib/jenkins/workspace/testJob/*.py
+        src: /var/lib/jenkins/workspace/TestJob/*.py
         dest: /home/web/www/*.py
      notify: restart flask app
 
