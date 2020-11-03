@@ -2,12 +2,27 @@
 - hosts: all
   become: true
   tasks:
+   - name: copy ini
+     copy:
+       src: /var/jenkins_home/workspace/testWeb_main/app.ini
+       dest: /home/web/www/app.ini
+   - name: copy service
+     copy:
+       src: /var/jenkins_home/workspace/testWeb_main/app/app.service
+       dest: /etc/systemd/system/app.service
+   - name: copy site conf
+     copy:
+        src: /var/jenkins_home/workspace/testWeb_main/app/app.conf
+        dest: /etc/nginx/sites-enabled/app.conf
+     notify: restart nginx
    - name: copy app file
      copy:
-        src: /var/jenkins_home/workspace/samplePY_master/app.py
-        dest: /home/web/www/app.py
+        src: /var/jenkins_home/workspace/testWeb_main/*.py
+        dest: /home/web/www/*.py
      notify: restart flask app
 
   handlers:
     - name: restart flask app
       service: name=app state=restarted
+    - name: restart nginx
+      service: name=nginx state=restarted
