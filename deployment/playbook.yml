@@ -2,6 +2,6 @@
 - hosts: all
   become: true
   tasks:
-   - name: lsit
+   - name: list
      shell:
-       ls   /var/lib/jenkins/workspace/TestJob/
+       ls  .
