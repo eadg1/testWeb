@@ -1,7 +1,28 @@
 ---
 - hosts: all
-#  become: true
+  become: true
   tasks:
-   - name: list
-     shell:
-       echo "OK";
+   - name: copy ini
+     copy:
+       src:  /var/lib/jenkins/workspace/TestJob/app.ini
+       dest: /home/web/www/app.ini
+   - name: copy service
+     copy:
+       src: /var/lib/jenkins/workspace/TestJob/app/app.service
+       dest: /etc/systemd/system/app.service
+   - name: copy site conf
+     copy:
+        src: /var/lib/jenkins/workspace/TestJob/app/app.conf
+        dest: /etc/nginx/sites-enabled/app.conf
+     notify: restart nginx
+   - name: copy app file
+     copy:
+        src: /var/lib/jenkins/workspace/TestJob/*.py
+        dest: /home/web/www/*.py
+     notify: restart flask app
+
+  handlers:
+    - name: restart flask app
+      service: name=app state=restarted
+    - name: restart nginx
+      service: name=nginx state=restarted
