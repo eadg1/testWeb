@@ -17,9 +17,9 @@
      notify: restart nginx
    - name: copy app file
      copy:
-        src: /var/lib/jenkins/workspace/TestJob/*.py
-        dest: /home/web/www/*.py
-     notify: restart flask app
+        src: /var/lib/jenkins/workspace/TestJob/{{item}}
+        dest: /home/web/www/
+     with_fileglob: "*.py"
 
   handlers:
     - name: restart flask app
