@@ -35,7 +35,7 @@
      
    - name: Start service app
      service:
-       name: httpd
+       name: app
        state: started
   handlers:
     
