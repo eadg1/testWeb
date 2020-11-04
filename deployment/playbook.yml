@@ -10,7 +10,6 @@
      copy:
        src: /var/lib/jenkins/workspace/TestJob/app/app.service
        dest: /etc/systemd/system/app.service
-     notify: restart flask
      
    - name: copy site conf
      copy:
