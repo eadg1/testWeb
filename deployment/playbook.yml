@@ -21,6 +21,7 @@
         src: /var/lib/jenkins/workspace/TestJob/app.py
         dest: /home/web/www/app.py
    - name: copy uwsgi file
+     copy:
         src: /var/lib/jenkins/workspace/TestJob/wsgi.py
         dest: /home/web/www/wsgi.py
         
