@@ -15,7 +15,7 @@ pipeline {
         sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
         sh 'echo "[webservers]" > /etc/ansible/hosts'
         sh 'echo " web@192.168.2.21" >> /etc/ansible/hosts'
-        sh 'ls -l'      }
+        sh 'pwd'      }
     }
     stage('test') {
       steps {
