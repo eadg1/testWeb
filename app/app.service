@@ -7,7 +7,7 @@ User=www-data
 Group=www-data
 WorkingDirectory=/var/www/app/
 Environment=FLASK_ENV=test
-ExecStart=/usr/local/bin/uwsgi --ini /var/www/app/app.ini
+ExecStart=/usr/bin/uwsgi --ini /var/www/app/app.ini
 
 [Install]
 WantedBy=multi-user.target
