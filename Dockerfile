@@ -14,4 +14,4 @@ COPY . /
 
 ENTRYPOINT [ "python3" ]
 
-CMD [ "app/app.py" ]
+CMD [ "app.py" ]
