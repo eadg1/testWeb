@@ -10,10 +10,6 @@ pipeline {
         sh 'echo deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main >> /etc/apt/sources.list'
         sh 'apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367'
         sh 'apt update'
-        sh 'apt install -y ansible'
-        sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
-        sh 'echo "[webservers]" > /etc/ansible/hosts'
-        sh 'echo " web@192.168.2.21" >> /etc/ansible/hosts'
         sh 'pwd'      }
     }
     stage('test') {
@@ -31,10 +27,9 @@ stage ('Deploy') {
               }
             }
 steps {
-    ansiblePlaybook(playbook:'deployment/playbook.yml',
-        credentialsId: 'web',
-        disableHostKeyChecking: true,
-        extras: '-e username=web')
+
+    def customImage = docker.build("my-image:${env.BUILD_ID}")
+    customImage.push()
 
         }
     }
