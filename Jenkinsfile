@@ -7,7 +7,6 @@ pipeline {
     stage('build') {
       steps {
         sh 'pip install -r requirements.txt'
-        sh 'echo deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main >> /etc/apt/sources.list'
         sh 'apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367'
         sh 'apt update'
         sh 'pwd'      }
@@ -28,11 +27,11 @@ stage ('Deploy') {
             }
 steps {
      script {
-    def customImage = docker.build("my-image:${env.BUILD_ID}")
-    customImage.push()
-    }
+       def customImage = docker.build("my-image:${env.BUILD_ID}")
+       
+      }
 
-        }
+     }
     }
   }
 }
