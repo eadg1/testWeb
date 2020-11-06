@@ -1,4 +1,8 @@
 pipeline {
+ environment{
+    registry = "$DOCKER_REGISTRY"
+    registryCredential = 'docker'
+  }
   agent { docker { 
   image 'python:3.7.2'  
   args '--user 0:0' } }
@@ -18,20 +22,37 @@ pipeline {
     }
 
 
-stage ('Deploy') {
+stage ('Build Image') {
 
      when {
               expression {
                 currentBuild.result == null || currentBuild.result == 'SUCCESS' 
               }
             }
-steps {
-     script {
-       def customImage = docker.build("my-image:${env.BUILD_ID}")
-       
+             steps{
+        script {
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+        }
       }
-
-     }
+    }
+    
+    stage('Deploy Image') {
+      steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            dockerImage.push()
+          }
+        }
+      }
+    }    
+    stage('Remove Unused docker image') {
+      steps{
+        sh "docker rmi $registry:$BUILD_NUMBER"
+      }
+    }
+  }    
+    
+    
     }
   }
 }
