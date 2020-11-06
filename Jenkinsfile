@@ -19,7 +19,8 @@ pipeline {
         sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
         sh 'echo "[webservers]" > /etc/ansible/hosts'
         sh 'echo "$WEB_SERVER"  >> /etc/ansible/hosts'
-        sh 'pwd'      }
+        sh 'pwd'      
+        }
     }
 
 
@@ -61,7 +62,7 @@ stage ('Build Image') {
     }    
  }
 
-
+}
 
 
 
