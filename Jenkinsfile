@@ -59,7 +59,7 @@ stage ('Build Image') {
             ansiblePlaybook(playbook:'deployment/playbook.yml',
             credentialsId: 'web',
             disableHostKeyChecking: true,
-            extras: '-e username=web -e user={{USER}} -e pass={{PASSWORD}})
+            extras: '-e username=web -e user={{USER}} -e pass={{PASSWORD}}')
           }
          
         }
