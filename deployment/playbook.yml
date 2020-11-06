@@ -15,11 +15,14 @@
       docker_image:
         name: "{{ default_container_image }}"
         source: pull
-
+    - name: Delete container if exists 
+      docker_container:
+       name: {{ default_container_name }}
+       state: absent
     - name: Create default containers
       docker_container:
         name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
         ports:
            - "80:8000"
-        state: present
+        state: started
