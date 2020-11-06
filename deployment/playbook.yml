@@ -20,4 +20,6 @@
       docker_container:
         name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
+        ports:
+           - "80:8000"
         state: present
