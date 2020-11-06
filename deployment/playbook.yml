@@ -9,6 +9,10 @@
       docker_login:
         username: "{{ lookup('env','USER') }}"
         password: "{{ lookup ('env','PASSWORD')}}"
+        
+    - debug:
+        msg: User {{username}}
+        
     - name: Pull default Docker image
       docker_image:
         name: "{{ default_container_image }}"
