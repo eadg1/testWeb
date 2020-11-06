@@ -72,7 +72,7 @@ stage ('Build Image') {
  }
      stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:latest
+        sh "docker rmi $registry:latest"
       }
     }
   }
