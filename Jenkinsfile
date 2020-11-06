@@ -60,6 +60,7 @@ stage ('Build Image') {
             credentialsId: 'web',
             disableHostKeyChecking: true,
             extras:' -e D_USER=${env.D_USERNAME} -e D_PASSWORD=${env.D_PASSWORD}')
+            echo "${env.D_USERNAME}"
           }
          
         }
