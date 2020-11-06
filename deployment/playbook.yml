@@ -7,8 +7,8 @@
   tasks:
     - name: Log into DockerHub
       docker_login:
-        username: "{{ lookup('env','USER') }}"
-        password: "{{ lookup ('env','PASSWORD')}}"
+        username: "{{ lookup('env','D_USER') }}"
+        password: "{{ lookup ('env','D_PASSWORD')}}"
         
     - debug:
         msg: User {{username}}
