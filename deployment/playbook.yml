@@ -7,7 +7,7 @@
   tasks:
     - name: Log into DockerHub
       docker_login:
-        username: "{{ user }}"
+        username: "{{ lookup('env','USER') }}"
         password: "{{ pass }}"
     - name: Pull default Docker image
       docker_image:
