@@ -3,7 +3,7 @@
   vars:
     create_containers: 1
     default_container_name: flaskapp
-    default_container_image: annvzel/jenkinsdocker
+    default_container_image: {{D_REG}}:latest
   tasks:
     - debug: msg="{{ D_USER }}"
     - name: Log into DockerHub
@@ -17,7 +17,7 @@
         source: pull
 
     - name: Create default containers
-      docker_container:
+      community.general.docker_container:
         name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
         ports:

@@ -61,7 +61,8 @@ stage ('Build Image') {
             disableHostKeyChecking: true,
             extraVars: [
                     D_USER: "${D_USERNAME}",
-                    D_PASS: "${D_PASSWORD}"]
+                    D_PASS: "${D_PASSWORD}",
+                    D_REG: "${DOCKER_REGISTRY}"]
             )
           }
          
