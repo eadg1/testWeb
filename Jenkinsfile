@@ -56,7 +56,7 @@ stage ('Build Image') {
         
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
-            withCredentials([[$class: 'UsernamePasswordMultiBinding', registryCredential,
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'docker',
            usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
            ]){
             ansiblePlaybook(playbook:'deployment/playbook.yml',
