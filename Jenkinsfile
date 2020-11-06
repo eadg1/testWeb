@@ -56,10 +56,13 @@ stage ('Build Image') {
             withCredentials([[$class: 'UsernamePasswordMultiBinding', credentialsId:'docker',
            usernameVariable: 'D_USERNAME', passwordVariable: 'D_PASSWORD']
            ]){
-            sh "echo $D_USERNAME";
             ansiblePlaybook(playbook:'deployment/playbook.yml',
             credentialsId: 'web',
-            disableHostKeyChecking: true)
+            disableHostKeyChecking: true,
+            extraVars: [
+                    D_USER: "${D_USERNAME}",
+                    D_PASS: "${D_PASSWORD}"]
+            )
           }
          
         }
