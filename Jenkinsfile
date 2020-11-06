@@ -78,7 +78,6 @@ stage ('Build Image') {
   }
 }
 }
-}
 
 
 
