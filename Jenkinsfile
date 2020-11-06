@@ -49,9 +49,6 @@ stage ('Build Image') {
     
     stage('Deploy Image') {
       steps{
-                environment {
-                DC= credentials('docker')
-            }
         script {
         
           docker.withRegistry( '', registryCredential ) {
