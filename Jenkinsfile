@@ -2,6 +2,7 @@ pipeline {
  environment{
     registry = "$DOCKER_REGISTRY"
     registryCredential = 'docker'
+    $SERVER=getVar(WEB_SERVER)
   }
   agent { docker { 
   image 'python:3.7.2'  
@@ -18,7 +19,7 @@ pipeline {
         sh 'apt install -y ansible'
         sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
         sh 'echo "[webservers]" > /etc/ansible/hosts'
-        sh 'echo "$WEB_SERVER"  >> /etc/ansible/hosts'
+        sh 'echo $SERVER  >> /etc/ansible/hosts'
         sh 'cat /etc/ansible/hosts'
         sh 'pwd'      
         }
