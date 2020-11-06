@@ -17,7 +17,7 @@
         source: pull
     - name: Delete container if exists 
       docker_container:
-       name: {{ default_container_name }}
+       name: "{{ default_container_name }}"
        state: absent
     - name: Create default containers
       docker_container:
