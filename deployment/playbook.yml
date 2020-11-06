@@ -8,7 +8,7 @@
     - name: Log into DockerHub
       docker_login:
         username: "{{ lookup('env','USER') }}"
-        password: "{{ lookup ('env','PASSWORD'}}"
+        password: "{{ lookup ('env','PASSWORD')}}"
     - name: Pull default Docker image
       docker_image:
         name: "{{ default_container_image }}"
