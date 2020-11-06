@@ -4,8 +4,9 @@
     create_containers: 1
     default_container_name: flaskapp
     default_container_image: annvzel/jenkinsdocker
+    dockeruser: "{{ lookup('env','D_USERNAME') }}"
   tasks:
-    - debug: msg="{{ lookup('env','D_USERNAME') }}"
+    - debug: msg="{{ dockeruser }}"
     - name: Log into DockerHub
       docker_login:
         username: "{{ lookup('env',D_USERNAME) }}"
