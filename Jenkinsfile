@@ -49,21 +49,27 @@ stage ('Build Image') {
     
     stage('Deploy Image') {
       steps{
+                environment {
+                DC= credentials('docker')
+            }
         script {
+        
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
+            withCredentials([[$class: 'UsernamePasswordMultiBinding', registryCredential,
+           usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD']
+           ]){
             ansiblePlaybook(playbook:'deployment/playbook.yml',
             credentialsId: 'web',
             disableHostKeyChecking: true,
-            extras: '-e username=web')
-
+            extras: '-e username=web -e dockeruser=$USER -e dockerpass=$PASSWORD')
           }
          
         }
       }
     }    
  }
-
+}
 }
 
 
