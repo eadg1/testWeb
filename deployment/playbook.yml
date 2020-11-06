@@ -17,7 +17,7 @@
         source: pull
 
     - name: Create default containers
-      community.general.docker_container:
+      docker_container:
         name: "{{ default_container_name }}"
         image: "{{ default_container_image }}"
         ports:
