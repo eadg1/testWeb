@@ -2,7 +2,7 @@ pipeline {
  environment{
     registry = "$DOCKER_REGISTRY"
     registryCredential = 'docker'
-    SERVER=getVar(WEB_SERVER)
+    SERVER=${WEB_SERVER}
   }
   agent { docker { 
   image 'python:3.7.2'  
