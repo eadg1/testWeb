@@ -8,13 +8,21 @@ pipeline {
   args '--user 0:0' } }
 
   stages {
+
     stage('build') {
       steps {
         sh 'pip install -r requirements.txt'
+        sh 'echo deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main >> /etc/apt/sources.list'
         sh 'apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367'
         sh 'apt update'
+        sh 'apt install -y ansible'
+        sh 'export ANSIBLE_HOST_KEY_CHECKING=False'
+        sh 'echo "[webservers]" > /etc/ansible/hosts'
+        sh 'echo "$WEB_SERVER"  >> /etc/ansible/hosts'
         sh 'pwd'      }
     }
+
+
     stage('test') {
       steps {
         sh 'python test.py'
@@ -41,7 +49,13 @@ stage ('Build Image') {
         script {
           docker.withRegistry( '', registryCredential ) {
             dockerImage.push()
+            ansiblePlaybook(playbook:'deployment/playbook.yml',
+            credentialsId: 'web',
+            disableHostKeyChecking: true,
+            extras: '-e username=web')
+
           }
+         
         }
       }
     }    
